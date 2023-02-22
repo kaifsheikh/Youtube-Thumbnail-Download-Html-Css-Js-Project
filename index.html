@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- css link  -->
+    <link rel="stylesheet" href="./style/style.css">
+
+    <!-- font awesome cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+</head>
+
+<body>
+    <form accept="#">
+        <header>Download Thumbnail</header>
+        <div class="url-input">
+            <span class="title">Past Your URL:</span>
+            <div class="field">
+                <input type="text" placeholder="https://www.youtube.com/watch?v=g_NDSoL9AbA" required>
+                <div class="bottom-line"></div>
+            </div>
+        </div>
+
+        <div class="preview-area">
+            <img class="thumbnail" src="" alt="thumbnail">
+            <i class="icon fas fa-cloud-download-alt"></i>
+            <span>Past Video URL to see Preview</span>
+        </div>
+        <button class="download-btn" type="submit">Download Thumbnail</button>
+    </form>
+
+    <script>
+        const urlfield = document.querySelector('.field input'),
+            previewarea = document.querySelector('.preview-area'),
+            imgtag = previewarea.querySelector('.thumbnail');
+
+        urlfield.onkeyup = () => {
+
+            let imgurl = urlfield.value;
+            // console.log(imgurl);
+            previewarea.classList.add('active');
+
+            // https://www.youtube.com/watch?v=jweiuw example of video URL
+
+            if (imgurl.indexOf("https://www.youtube.com/watch?v=") != -1) {
+
+                let vidid = imgurl.split("v=")[1].substring(0, 11);
+                // console.log(vidid);
+                let ytThumburl = `https://i.ytimg.com/vi/${vidid}/hq720.jpg`;
+                // console.log(ytThumburl);
+                imgtag.src = ytThumburl;
+
+            } else if (imgurl.indexOf("https://youtu.be/") != -1) {
+
+                let vidid = imgurl.split("v=")[1].substring(0, 11);
+                // console.log(vidid);
+                let ytThumburl = `https://i.ytimg.com/vi/${vidid}/hq720.jpg`;
+                // console.log(ytThumburl);
+                imgtag.src = ytThumburl;
+
+            } else if (imgurl.match(/\.(jpe?g|png|gif|bmp|webp)$/i)) {
+
+                imgtag.src = ytThumburl;
+            }
+        }
+    </script>
+</body>
+
+</html>
